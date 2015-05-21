@@ -208,7 +208,7 @@ public abstract class AxisController{
      */
     protected ArrayList<String> getLabelsFromData() {
 
-        int size = chartView.data.get(0).size();
+        int size = chartView.data.size() > 0 ? chartView.data.get(0).size() : 0;
         ArrayList<String> result = new ArrayList<String>(size);
         for(int i = 0; i < size; i++)
             result.add(chartView.data.get(0).getLabel(i));
@@ -288,13 +288,15 @@ public abstract class AxisController{
 
     protected int getLabelHeight(){
 
-        if(labelHeight == -1){
+        if(labelHeight == -1 || labelHeight == 0){
 
             int result = 0;
-            for(ChartEntry e : chartView.data.get(0).getEntries()){
-                result = chartView.style.getTextHeightBounds(e.getLabel());
-                if(result != 0)
-                    break;
+            if(chartView.data.size() > 0) {
+                for (ChartEntry e : chartView.data.get(0).getEntries()) {
+                    result = chartView.style.getTextHeightBounds(e.getLabel());
+                    if (result != 0)
+                        break;
+                }
             }
             labelHeight = result;
         }

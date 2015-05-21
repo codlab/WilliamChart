@@ -248,12 +248,14 @@ public abstract class ChartView extends RelativeLayout{
 	 */
 	private void digestData() {
 
-		int nEntries = data.get(0).size();
-		for(ChartSet set: data){
-			for(int i = 0; i < nEntries; i++){
-				set.getEntry(i)
-					.setCoordinates(horController.parsePos(i, set.getValue(i)),
-                                        verController.parsePos(i, set.getValue(i)));
+		if(data != null && data.size() > 0) {
+			int nEntries = data.get(0).size();
+			for (ChartSet set : data) {
+				for (int i = 0; i < nEntries; i++) {
+					set.getEntry(i)
+							.setCoordinates(horController.parsePos(i, set.getValue(i)),
+									verController.parsePos(i, set.getValue(i)));
+				}
 			}
 		}
 	}

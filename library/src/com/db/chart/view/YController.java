@@ -93,11 +93,11 @@ public class YController extends AxisController{
      */
     protected float parsePos(int index, double value){
 
-        if(handleValues)
+        if(handleValues && labelsValues.size() > 1)
             return (float) ( chartView.horController.getAxisVerticalPosition() -
                 (((value - minLabelValue) * screenStep) / (labelsValues.get(1) - minLabelValue)));
         else
-            return labelsPos.get(index);
+            return labelsPos.size() > index ? labelsPos.get(index) : -1;
     }
 
 
