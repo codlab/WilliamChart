@@ -923,9 +923,9 @@ public abstract class ChartView extends RelativeLayout{
 	 */
 	public ChartView setAxisBorderValues(int minValue, int maxValue, int step){
 		
-		if((maxValue - minValue) % step != 0)
-			Log.e(TAG, "Step value must be a divisor of distance between " +
-					"minValue and maxValue", new IllegalArgumentException());
+		if(step < 1) {
+			Log.e(TAG, "Step value must be greater than 0", new IllegalArgumentException());
+		}
 
         if(orientation == Orientation.VERTICAL) {
             verController.maxLabelValue = maxValue;
